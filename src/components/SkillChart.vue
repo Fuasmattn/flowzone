@@ -1,6 +1,7 @@
 <template>
  <div>
-   <svg></svg>
+   <h2>{{skill}}</h2>
+   <svg @click="handleClick"></svg>
  </div>
 </template>
 
@@ -12,46 +13,63 @@
 
   data() {
    return {
+    index: 0,
+    skillStack: ['Scrum', 'MongoDB', 'Angular', 'React-Native', 'Vue', 'Springboot', 'Payara', 'Kubernetes' ],
+    skillColors: [],
     svg: '',
    }
   },
 
   computed: {
+   skill() {
+    return this.skillStack[this.index];
+   }
   },
   mounted() {
    this.setupD3();
-   this.drawCircle(300, 100, 10, color)
-
   },
   methods: {
+   next() {
+    if(this.index !== this.skillStack.length - 1) {
+     this.index++; return true;
+    }
+    return false;  
+   },
    drawAxes() {
+
+   },
+   handleClick() {
+    this.next();
 
    },
    setupD3() {
     this.svg = d3.select('svg');
     const svg = this.svg;
     svg.append('g').attr('class', 'container');
-    svg.on('click', function() {
-      const drawCircle = (cx, cy, r, color) => {
+    this.next() && svg.on('click', function() {
+      const drawCross = (x, y, r, color) => {
+       svg.select('.container')
+        .append('line')
+        .attr('x1', x - r)
+        .attr('x2', x + r )
+        .attr('y1', y - r)
+        .attr('stroke-width', '3px')
+        .attr('y2', y + r);
+
         svg.select('.container')
-         .append('circle')
-         .attr('cx', cx)
-         .attr('cy', cy)
-         .attr('r', r)
-         .attr('fill', color);
+        .attr('stroke', color)
+        .append('line')
+        .attr('x1', x + r)
+        .attr('x2', x - r )
+        .attr('y1', y - r)
+        .attr('y2', y + r)
+        .attr('stroke-width', '3px')
+        .attr('stroke', color);
     }
      const coords = d3.mouse(this);
-     drawCircle(coords[0], coords[1], 10, color);
+     drawCross(coords[0], coords[1], 5, color);
     })
-   },
-   drawCircle(cx, cy, r, color) {
-    this.svg.select('.container')
-     .append('circle')
-     .attr('cx', cx)
-     .attr('cy', cy)
-     .attr('r', r)
-     .attr('fill', color);
-   },
+   }
 
   }
  }
