@@ -1,9 +1,9 @@
 <template>
   <div class="base-view">
-   <h1>FlowZone</h1>
+   <h1>FZA</h1>
    <div class="container">
-    <skill-stack-list :skill-colors="skillColors" :active="activeSkill" :skills="skills"></skill-stack-list>
     <skill-chart :skill-colors="skillColors" @nextSkill="onNextSkill" :active="activeSkill" :skills="skills"></skill-chart>
+    <skill-stack-list :skill-colors="skillColors" :active="activeSkill" :skills="skills"></skill-stack-list>
    </div>
   </div>
 </template>
