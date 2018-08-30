@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       activeSkill: 0,
-      skillColors: ['#E5F9E0', '#A3F7B5', '#40C9A2', '#2F9C95', '#664147', '#2274A5', '#8A6552'],
+      skillColors: ['#E5F9E0', '#A3F7B5', '#40C9A2', '#2F9C95', '#664147', '#2274A5', '#8A6552', '#9D8420'],
       skills: [{id: 0, name: 'Scrum'}, {id: 1, name: 'MongoDB'}, {id: 2, name: 'Angular'}, {id: 3, name: 'React-Native'}, {id: 4, name: 'Vue'}, {id: 5, name: 'Springboot'}, {id: 6, name: 'Payara'}, {id: 7, name: 'Kubernetes'} ]
     }
   },

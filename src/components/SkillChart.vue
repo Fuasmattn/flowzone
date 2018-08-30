@@ -47,10 +47,10 @@
   },
   methods: {
    next() {
-    if(this.active !== this.skillStack.length) {
+    if(this.active !== this.skillStack.length + 1) {
      // send to parent
      this.$emit('nextSkill', this.active);
-     this.done = this.active === this.skillStack.length - 1;
+     this.done = this.active === this.skillStack.length + 1;
      return this.done;
     }
     return false;  
