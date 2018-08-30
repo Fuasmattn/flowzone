@@ -12,7 +12,8 @@ export default {
   data() {
     return {
       svg: "",
-      done: false
+      done: false,
+      showFlowzone: true
     };
   },
 
@@ -45,7 +46,19 @@ export default {
   mounted() {
     this.setupD3();
   },
+  watch: {
+    showFlowzone() {
+      if (this.showFlowzone) {
+        this.flowzoneColor = "#aeaeae";
+      } else {
+        this.flowzoneColor = "#fff";
+      }
+    }
+  },
   methods: {
+    toggleFlowzone() {
+      this.showFlowzone = !this.showFlowzone;
+    },
     next() {
       if (this.active !== this.skillStack.length + 1) {
         // send to parent
@@ -75,8 +88,8 @@ export default {
         .scaleOrdinal()
         .domain([100, 50, 0])
         .range([10, 500 - padding]);
-      const xAxis = d3.axisBottom(xScale).tickValues(['high', 'low']);
-      const yAxis = d3.axisLeft(yScale).tickValues(['low', 'high']);
+      const xAxis = d3.axisBottom(xScale).tickValues(["high", "low"]);
+      const yAxis = d3.axisLeft(yScale).tickValues(["low", "high"]);
       svg
         .append("g")
         .attr("transform", `translate(50, 460)`)
@@ -98,13 +111,33 @@ export default {
       svg
         .append("text")
         .attr("text-anchor", "end") // this makes it easy to centre the text as the transform is applied to the anchor
-        .attr(
-          "transform",
-          "translate(500, 450)"
-        ) // centre below axis
+        .attr("transform", "translate(500, 450)") // centre below axis
         .text("Estimated Skill Level");
 
       svg.append("svg").attr("class", "container");
+
+      const poly = [
+        { x: 50, y: 360 },
+        { x: 50, y: 460 },
+        { x: 150, y: 460 },
+        { x: 520, y: 100 },
+        { x: 420, y: 0 },
+      ];
+      // draw flowzone
+      svg
+        .selectAll("polygon")
+        .data([poly])
+        .enter()
+        .append("polygon")
+        .attr('opacity', .1)
+        .style('fill', 'green')
+        .attr("points", function(d) {
+          return d
+            .map(function(d) {
+              return [(d.x), (d.y)].join(",");
+            })
+            .join(" ");
+        });
 
       d3.select(".container").on("click", function() {
         const color = that.color;
@@ -116,7 +149,7 @@ export default {
             .attr("x1", x - r)
             .attr("x2", x + r)
             .attr("y1", y - r)
-            .attr("stroke-width", "3px")
+            .attr("stroke-width", "6px")
             .attr("y2", y + r);
 
           svg
@@ -126,7 +159,7 @@ export default {
             .attr("x2", x - r)
             .attr("y1", y - r)
             .attr("y2", y + r)
-            .attr("stroke-width", "3px")
+            .attr("stroke-width", "6px")
             .attr("stroke", color);
         };
         const coords = d3.mouse(this);
