@@ -121,16 +121,27 @@ export default {
         { x: 50, y: 460 },
         { x: 150, y: 460 },
         { x: 520, y: 100 },
-        { x: 420, y: 0 },
+        { x: 510, y: 25 },
+        { x: 410, y: 25 },
       ];
+      function blur() {
+        filter.attr("stdDeviation", this.value / 10);
+    }
       // draw flowzone
+      const filter = svg.append("defs")
+    .append("filter")
+    .attr("id", "blur")
+    .append("feGaussianBlur")
+    .attr("stdDeviation", 20);
+    
       svg
         .selectAll("polygon")
         .data([poly])
         .enter()
         .append("polygon")
         .attr('opacity', .1)
-        .style('fill', 'green')
+        .style('fill', 'blue')
+        .attr('filter', "url(#blur)")
         .attr("points", function(d) {
           return d
             .map(function(d) {
