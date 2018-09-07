@@ -16,7 +16,6 @@ export default {
       showFlowzone: true
     };
   },
-
   props: {
     skillColors: {
       type: Array,
@@ -60,10 +59,10 @@ export default {
       this.showFlowzone = !this.showFlowzone;
     },
     next() {
-      if (this.active !== this.skillStack.length + 1) {
+      if (this.active !== this.skillStack.length) {
         // send to parent
         this.$emit("nextSkill", this.active);
-        this.done = this.active === this.skillStack.length + 1;
+        this.done = this.active === this.skillStack.length;
         return this.done;
       }
       return false;
@@ -114,7 +113,7 @@ export default {
         .attr("transform", "translate(500, 450)") // centre below axis
         .text("Estimated Skill Level");
 
-      svg.append("svg").attr("class", "container");
+      svg.attr("class", "container");
 
       const poly = [
         { x: 50, y: 360 },
@@ -154,23 +153,20 @@ export default {
         const color = that.color;
         const drawCross = (x, y, r) => {
           svg
-            .select(".container")
             .append("line")
             .attr("stroke", color)
             .attr("x1", x - r)
             .attr("x2", x + r)
             .attr("y1", y - r)
-            .attr("stroke-width", "6px")
+            .attr("stroke-width", "3px")
             .attr("y2", y + r);
-
-          svg
-            .select(".container")
+          svg     
             .append("line")
             .attr("x1", x + r)
             .attr("x2", x - r)
             .attr("y1", y - r)
             .attr("y2", y + r)
-            .attr("stroke-width", "6px")
+            .attr("stroke-width", "3px")
             .attr("stroke", color);
         };
         const coords = d3.mouse(this);

@@ -1,7 +1,7 @@
 <template>
 <div class="skill-stack-list">
  <ul>
-  <li v-for="{id, name} in skills" :key="id" :style="{'background-color': active === id ? skillColors[id]: 'transparent'}" :class="{active: active === id}">
+  <li v-for="{id, name} in skills" :key="id" :style="{'color': active === id && ready ? skillColors[id]: 'black'}" :class="{active: active === id && ready}">
     {{ name }}
   </li>
  </ul>
@@ -12,6 +12,10 @@
  export default {
   name: 'SkillStackList',
   props: {
+    ready: {
+      type: Boolean,
+      required: true
+    },
    skills: {
     type: Array,
     required: true,
@@ -32,21 +36,21 @@
 <style>
 .skill-stack-list {
   vertical-align: top;
-  display: inline-block;
+  
 }
 .skill-stack-list > ul {
   list-style-type: none;
+  padding-left: 0;
 }
 
-li {
+.skill-stack-list > ul > li {
   opacity: .3;
-  width: 100px;
-  padding: 5px 15px;
-  border-radius: 50px;
-}
-li.active {
-  opacity: 1;
+  min-width: 100px;
+  padding: 8px 15px;
   font-weight: bold;
-  background-color: lightgreen;
+}
+.skill-stack-list > ul > li.active {
+  transition: all 800ms;
+  opacity: 1;
 }
 </style>
