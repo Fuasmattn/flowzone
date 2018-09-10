@@ -1,6 +1,17 @@
 <template>
   <div class="base-view">
 <div class="md-layout md-gutter">
+  <div class="md-layout-item">
+        <md-card >
+          <md-card-content>
+             <md-field>
+              <label>Add Team Member</label>
+                <md-input v-model="newMember" @keyup.enter="addNewMember"></md-input>
+            </md-field>
+                <member-stack-list :members="members"></member-stack-list>
+          </md-card-content>
+        </md-card>
+    </div>
     <div class="sm-layout-item">
         <md-card >
           <md-card-content>
@@ -12,17 +23,7 @@
          </md-card-content>
         </md-card>
     </div>
-    <div class="md-layout-item">
-        <md-card >
-          <md-card-content>
-             <md-field>
-              <label>Add Team Member</label>
-                <md-input v-model="newMember" @keyup.enter="addNewMember"></md-input>
-            </md-field>
-                <member-stack-list :members="members"></member-stack-list>
-          </md-card-content>
-        </md-card>
-    </div>
+    
     <div class="md-layout-item">
       <skill-chart v-if="ready" :skill-colors="skillColors" @nextSkill="onNextSkill" :active="activeSkill" :skills="skills"></skill-chart>
     </div>

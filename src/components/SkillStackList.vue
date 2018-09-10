@@ -47,10 +47,9 @@
   opacity: .3;
   min-width: 100px;
   padding: 8px 15px;
-  font-weight: bold;
 }
 .skill-stack-list > ul > li.active {
-  transition: all 800ms;
   opacity: 1;
+  border: 1px solid;
 }
 </style>
