@@ -1,10 +1,6 @@
 <template>
 <div class="skill-stack-list">
- <ul>
-  <li v-for="{id, name} in skills" :key="id" :style="{'color': active === id && ready ? skillColors[id]: 'black'}" :class="{active: active === id && ready}">
-    {{ name }}
-  </li>
- </ul>
+   <md-chip v-for="{id, name} in skills" :key="id" class="chip" :style="{'background-color': active === id && ready ? skillColors[id]: ''}" :class="{active: active === id && ready}" md-deletable>{{name}}</md-chip>
 </div>
 </template>
 
@@ -52,4 +48,9 @@
   opacity: 1;
   border: 1px solid;
 }
+.chip {
+  margin-bottom: 5px;
+  background-color: rgba(255,255,255,.2);
+}
+
 </style>

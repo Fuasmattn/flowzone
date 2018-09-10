@@ -114,6 +114,7 @@ export default {
         .text("Estimated Skill Level");
 
       svg.attr("class", "container");
+      const paddingOffset = 100;
 
       const poly = [
         { x: 50, y: 360 },
@@ -172,7 +173,7 @@ export default {
         const coords = d3.mouse(this);
         // stop adding crosses when skillstack has reached the end
         if (!that.done) {
-          drawCross(coords[0], coords[1], 6);
+          drawCross(coords[0], coords[1] - paddingOffset, 6);
         }
       });
     }
@@ -181,9 +182,7 @@ export default {
 </script>
 
 <style scoped>
-.skill-chart {
-  display: inline-block;
-}
+
 svg {
   height: 600px;
   width: 600px;

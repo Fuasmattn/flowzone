@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-   <app-title title="kimmd no"/>
    <base-view></base-view>
   </div>
 </template>
 
 <script>
 import BaseView from './components/BaseView.vue';
-import AppTitle from './components/AppTitle.vue';
+
 
 export default {
   name: 'app',
   components: {
-    BaseView, AppTitle
+    BaseView
   }
 }
 </script>
